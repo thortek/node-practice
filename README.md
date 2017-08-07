@@ -28,6 +28,18 @@ npm i && npm start
 yarn install && yarn start
 ```
 
+## Testing
+Mocha is installed and utilizing `babel-register` for importing ES2015 modules.
+Any js files put in the `./test` directory will be evaluated by Mocha when running:
+
+```sh
+# Using npm?
+npm test
+
+# Using yarn?
+yarn test
+```
+
 ## Production Builds
 We shouldn't use babel-node when serving our application in production. We need to
 compile our ES2015 code into code node will understand without babel. 
