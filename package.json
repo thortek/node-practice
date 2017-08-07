@@ -1,7 +1,7 @@
 {
   "author": "Aric Beagley <abeagley@heliotraining.com>",
   "dependencies": {},
-  "description": "A node boilerplate for simple API's utilizing ES2015 Stage 2 and JS Standard for linting rules",
+  "description": "A node boilerplate for simple projects utilizing ES2015 Stage 2 and JS Standard for linting rules.",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",

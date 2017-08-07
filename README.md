@@ -72,7 +72,5 @@ javascript standards.
 
 A few modified versions are listed below:
 
-* [Express Starter]()
-* [GraphQL Starter (Monk)]()
-* [GraphQL Starter (Sequelize)]()
+* [GraphQL Starter (Monk)](https://github.com/helio-training/helio-graphql-boilerplate-monk)
 
