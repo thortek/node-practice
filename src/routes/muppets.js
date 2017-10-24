@@ -58,8 +58,8 @@ muppetRouter.route('/:name')
     collection.update({ name: muppetName }, { name: replacement })
       .then((result) => {
         console.log(`Updated ${muppetName}`)
+        res.sendStatus(200)
       })
-    res.sendStatus(200)
   })
 
 export default muppetRouter
