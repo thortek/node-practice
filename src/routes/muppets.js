@@ -17,39 +17,55 @@ muppetRouter.route('/')
     collection.find() // get ALL of the muppets with this
       .then((docs) => {
         console.log(docs)
-        res.json(docs)
+        res.status(200).json(docs)
       })
       .catch((err) => {
-        console.log(err)
+        res.status(500).send(err)
       })
+      .then(() => db.close())
   })
-  .post(parseUrlencoded, function (req, res) {
+  .post(parseUrlencoded, (req, res) => {
     const newMuppet = req.body
-    console.log(newMuppet)
     collection.insert(newMuppet)
       .then((muppets) => {
         console.log(`Added ${newMuppet.name} to mongoMuppets`)
+        res.status(201).json(newMuppet)
       })
       .catch((err) => {
-        console.log(err)
+        res.status(500).send(err)
       })
       .then(() => db.close())
-
-    res.status(201).json(newMuppet)
   })
 
 muppetRouter.route('/:name')
   .get((req, res) => {
-    res.send(req.query.ID)
+    const muppetName = req.params
+    console.log(muppetName)
+    collection.find(muppetName)
+      .then((doc) => {
+        if (doc.length > 0) {
+          res.status(200).json(doc)
+        } else {
+          res.status(404).send(`No muppet named '${muppetName.name}' was found.`)
+        }
+      })
   })
   .delete((req, res) => {
-    const muppetName = req.params.name
+    const muppetName = req.params
     console.log(muppetName)
-    collection.remove({ name: muppetName })
+    collection.remove(muppetName)
       .then((result) => {
-        console.log(`Deleted ${muppetName}`)
+        if (result.deletedCount > 0) {
+          console.log(`Deleted ${muppetName}`)
+          res.sendStatus(200)
+        } else {
+          res.sendStatus(500)
+        }
       })
-    res.sendStatus(200)
+      .catch((err) => {
+        console.log(err)
+        res.status(500).send(err)
+      })
   })
 
 export default muppetRouter
