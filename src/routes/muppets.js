@@ -51,5 +51,15 @@ muppetRouter.route('/:name')
       })
     res.sendStatus(200)
   })
+  .put(parseUrlencoded, (req, res) => {
+    const muppetName = req.params.name
+    const replacement = req.body.name
+    console.log(replacement)
+    collection.update({ name: muppetName }, { name: replacement })
+      .then((result) => {
+        console.log(`Updated ${muppetName}`)
+      })
+    res.sendStatus(200)
+  })
 
 export default muppetRouter
