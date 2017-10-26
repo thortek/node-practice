@@ -5,9 +5,12 @@ const quoteRouter = express.Router()
 
 quoteRouter.route('/')
   .get((request, response) => {
-  axios.get(`http://quotes.rest/qod.json`)
+    axios.get(`http://quotes.rest/qod.json`)
       .then(res => {
         response.send(res.data.contents.quotes[0].quote)
+      })
+      .catch(function (error) {
+        console.log(error)
       })
   })
 
